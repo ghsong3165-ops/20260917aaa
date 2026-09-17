@@ -7,12 +7,14 @@ import { HomePage } from './pages/HomePage'
 import { StudyPage } from './pages/StudyPage'
 import { StatsPage } from './pages/StatsPage'
 import { WordListPage } from './pages/WordListPage'
+import { AiPage } from './pages/AiPage'
 
-export type AppTab = 'home' | 'study' | 'stats' | 'words'
+export type AppTab = 'home' | 'study' | 'stats' | 'words' | 'ai'
 
 const NAV_ITEMS: { tab: AppTab; label: string; icon: string }[] = [
   { tab: 'home', label: '홈', icon: '🏠' },
   { tab: 'study', label: '학습', icon: '🃏' },
+  { tab: 'ai', label: 'AI', icon: '🤖' },
   { tab: 'stats', label: '통계', icon: '📊' },
   { tab: 'words', label: '단어장', icon: '📖' },
 ]
@@ -20,6 +22,12 @@ const NAV_ITEMS: { tab: AppTab; label: string; icon: string }[] = [
 function App() {
   const [tab, setTab] = useState<AppTab>('home')
   const [theme, setTheme] = useTheme()
+  const [aiPrefillWord, setAiPrefillWord] = useState<string | undefined>(undefined)
+
+  const handleExplain = (word: string) => {
+    setAiPrefillWord(word)
+    setTab('ai')
+  }
 
   return (
     <StudyDataProvider>
@@ -30,7 +38,8 @@ function App() {
 
         <main className="app-content">
           {tab === 'home' && <HomePage onNavigate={setTab} />}
-          {tab === 'study' && <StudyPage />}
+          {tab === 'study' && <StudyPage onExplain={handleExplain} />}
+          {tab === 'ai' && <AiPage initialWord={aiPrefillWord} />}
           {tab === 'stats' && <StatsPage />}
           {tab === 'words' && <WordListPage />}
         </main>

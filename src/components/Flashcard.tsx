@@ -11,9 +11,10 @@ interface FlashcardProps {
   word: WordEntry
   flipped: boolean
   onFlip: () => void
+  onExplain?: (word: string) => void
 }
 
-export function Flashcard({ word, flipped, onFlip }: FlashcardProps) {
+export function Flashcard({ word, flipped, onFlip, onExplain }: FlashcardProps) {
   return (
     <div className={`flashcard ${flipped ? 'is-flipped' : ''}`} onClick={onFlip}>
       <div className="flashcard-inner">
@@ -34,6 +35,18 @@ export function Flashcard({ word, flipped, onFlip }: FlashcardProps) {
             </div>
             <p className="example-ko">{word.exampleMeaning}</p>
           </div>
+          {onExplain && (
+            <button
+              type="button"
+              className="link-button ai-explain-link"
+              onClick={(e) => {
+                e.stopPropagation()
+                onExplain(word.word)
+              }}
+            >
+              🤖 AI로 더 자세히 알아보기
+            </button>
+          )}
         </div>
       </div>
     </div>

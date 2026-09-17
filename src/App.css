@@ -160,6 +160,11 @@
   text-align: left;
 }
 
+.link-button:disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
 .reset-link {
   background: none;
   border: none;
@@ -560,6 +565,126 @@
 
 .level-progress-advanced {
   background: var(--advanced);
+}
+
+/* ---- AI ---- */
+.ai-explain-link {
+  font-size: 12px;
+  align-self: center;
+}
+
+.api-key-card {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.api-key-status {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.api-key-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.api-key-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.api-key-desc a {
+  color: var(--primary);
+}
+
+.api-key-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.api-key-input-row .search-input {
+  flex: 1;
+}
+
+.ai-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-error {
+  color: var(--wrong);
+  font-size: 13px;
+  background: rgba(232, 96, 76, 0.1);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.ai-result {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.chat-messages {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 12px;
+  height: 320px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.chat-bubble-user {
+  align-self: flex-end;
+  background: var(--primary);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble-model {
+  align-self: flex-start;
+  background: var(--bg);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-bubble-loading {
+  font-weight: 700;
+  opacity: 0.6;
 }
 
 /* ---- Word List ---- */

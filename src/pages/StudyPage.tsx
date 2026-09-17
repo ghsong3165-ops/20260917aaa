@@ -13,7 +13,11 @@ const LEVEL_OPTIONS: { value: LevelFilter; label: string }[] = [
   { value: 'advanced', label: '고급' },
 ]
 
-export function StudyPage() {
+interface StudyPageProps {
+  onExplain?: (word: string) => void
+}
+
+export function StudyPage({ onExplain }: StudyPageProps) {
   const { dueWords, recordReview } = useStudyData()
   const [levelFilter, setLevelFilter] = useState<LevelFilter>('all')
   const [session, setSession] = useState<WordEntry[] | null>(null)
@@ -60,7 +64,12 @@ export function StudyPage() {
           </span>
         </div>
 
-        <Flashcard word={current} flipped={flipped} onFlip={() => setFlipped((f) => !f)} />
+        <Flashcard
+          word={current}
+          flipped={flipped}
+          onFlip={() => setFlipped((f) => !f)}
+          onExplain={onExplain}
+        />
 
         {flipped ? (
           <div className="answer-buttons">
