@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import { StudyDataProvider } from './context/StudyDataContext'
+import { ThemeToggle } from './components/ThemeToggle'
+import { useTheme } from './hooks/useTheme'
 import { HomePage } from './pages/HomePage'
 import { StudyPage } from './pages/StudyPage'
 import { StatsPage } from './pages/StatsPage'
@@ -17,10 +19,15 @@ const NAV_ITEMS: { tab: AppTab; label: string; icon: string }[] = [
 
 function App() {
   const [tab, setTab] = useState<AppTab>('home')
+  const [theme, setTheme] = useTheme()
 
   return (
     <StudyDataProvider>
       <div className="app-shell">
+        <header className="app-header">
+          <ThemeToggle theme={theme} onChange={setTheme} />
+        </header>
+
         <main className="app-content">
           {tab === 'home' && <HomePage onNavigate={setTab} />}
           {tab === 'study' && <StudyPage />}
