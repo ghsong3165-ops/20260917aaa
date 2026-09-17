@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { WORDS } from '../data/words'
 import { useStudyData } from '../context/StudyDataContext'
+import { SpeakButton } from '../components/SpeakButton'
 import type { WordLevel, WordProgress } from '../types'
 import { isDue, isMastered } from '../utils/srs'
 
@@ -66,7 +67,10 @@ export function WordListPage() {
           return (
             <li key={w.id} className="word-list-item">
               <div className="word-list-main">
-                <span className="word-list-word">{w.word}</span>
+                <div className="word-list-word-row">
+                  <span className="word-list-word">{w.word}</span>
+                  <SpeakButton text={w.word} label={`${w.word} 발음 듣기`} />
+                </div>
                 <span className="word-list-meaning">{w.meaning}</span>
               </div>
               <span className={`status-badge ${status.className}`}>{status.label}</span>

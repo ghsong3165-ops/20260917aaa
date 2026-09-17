@@ -351,9 +351,40 @@
   background: var(--advanced);
 }
 
+.flashcard-word-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .flashcard-word {
   font-size: 32px;
   font-weight: 800;
+}
+
+.speak-button {
+  border: none;
+  background: var(--bg);
+  color: var(--primary);
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.speak-button:active {
+  transform: scale(0.92);
+}
+
+.example-en-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .flashcard-hint {
@@ -564,9 +595,23 @@
   gap: 2px;
 }
 
+.word-list-word-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .word-list-word {
   font-weight: 700;
   font-size: 15px;
+}
+
+.word-list-word-row .speak-button {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  font-size: 12px;
+  background: transparent;
 }
 
 .word-list-meaning {
