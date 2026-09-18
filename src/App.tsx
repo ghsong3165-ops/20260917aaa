@@ -8,13 +8,15 @@ import { StudyPage } from './pages/StudyPage'
 import { StatsPage } from './pages/StatsPage'
 import { WordListPage } from './pages/WordListPage'
 import { AiPage } from './pages/AiPage'
+import { ReaderPage } from './pages/ReaderPage'
 
-export type AppTab = 'home' | 'study' | 'stats' | 'words' | 'ai'
+export type AppTab = 'home' | 'study' | 'stats' | 'words' | 'ai' | 'reader'
 
 const NAV_ITEMS: { tab: AppTab; label: string; icon: string }[] = [
   { tab: 'home', label: '홈', icon: '🏠' },
   { tab: 'study', label: '학습', icon: '🃏' },
   { tab: 'ai', label: 'AI', icon: '🤖' },
+  { tab: 'reader', label: '리더', icon: '📜' },
   { tab: 'stats', label: '통계', icon: '📊' },
   { tab: 'words', label: '단어장', icon: '📖' },
 ]
@@ -40,6 +42,7 @@ function App() {
           {tab === 'home' && <HomePage onNavigate={setTab} />}
           {tab === 'study' && <StudyPage onExplain={handleExplain} />}
           {tab === 'ai' && <AiPage initialWord={aiPrefillWord} />}
+          {tab === 'reader' && <ReaderPage />}
           {tab === 'stats' && <StatsPage />}
           {tab === 'words' && <WordListPage />}
         </main>

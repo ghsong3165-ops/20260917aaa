@@ -687,6 +687,131 @@
   opacity: 0.6;
 }
 
+/* ---- Reader ---- */
+.reader-textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.reader-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.reader-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.reader-panel {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reader-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reader-panel-word {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.reader-panel-meaning {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.reader-panel-muted {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.reader-panel-example {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.reader-text {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.reader-paragraph {
+  font-size: 15px;
+  line-height: 2;
+  margin-bottom: 14px;
+}
+
+.reader-word {
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--text);
+  padding: 1px 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reader-word:hover {
+  background: var(--bg);
+}
+
+.reader-word-known.status-mastered {
+  color: var(--correct);
+  font-weight: 700;
+}
+
+.reader-word-known.status-due {
+  color: var(--wrong);
+  font-weight: 700;
+}
+
+.reader-word-known.status-learning {
+  color: var(--intermediate);
+  font-weight: 700;
+}
+
+.reader-word-known.status-new {
+  color: var(--primary);
+}
+
+.reader-word-unknown {
+  color: var(--text-muted);
+  border-bottom: 1px dotted var(--text-muted);
+}
+
+.reader-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 /* ---- Word List ---- */
 .search-input {
   width: 100%;
@@ -737,6 +862,15 @@
   min-width: 26px;
   font-size: 12px;
   background: transparent;
+}
+
+.word-source-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg);
+  border-radius: 999px;
+  padding: 2px 8px;
 }
 
 .word-list-meaning {

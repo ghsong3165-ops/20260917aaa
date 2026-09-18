@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
-import { WORDS } from '../data/words'
+import { WORDS, WORD_SOURCES } from '../data/words'
 import { useStudyData } from '../context/StudyDataContext'
 import { SpeakButton } from '../components/SpeakButton'
 import type { WordLevel, WordProgress } from '../types'
 import { isDue, isMastered } from '../utils/srs'
 
 type LevelFilter = WordLevel | 'all'
+type SourceFilter = 'all' | 'core' | string
 
 const LEVEL_OPTIONS: { value: LevelFilter; label: string }[] = [
   { value: 'all', label: '전체' },
@@ -14,7 +15,13 @@ const LEVEL_OPTIONS: { value: LevelFilter; label: string }[] = [
   { value: 'advanced', label: '고급' },
 ]
 
-function statusOf(progress: WordProgress | undefined): { label: string; className: string } {
+const SOURCE_OPTIONS: { value: SourceFilter; label: string }[] = [
+  { value: 'all', label: '전체' },
+  { value: 'core', label: '기본 단어장' },
+  ...WORD_SOURCES.map((s) => ({ value: s, label: s })),
+]
+
+export function statusOf(progress: WordProgress | undefined): { label: string; className: string } {
   if (!progress) return { label: '새 단어', className: 'status-new' }
   if (isMastered(progress)) return { label: '암기 완료', className: 'status-mastered' }
   if (isDue(progress)) return { label: '복습 필요', className: 'status-due' }
@@ -25,16 +32,20 @@ export function WordListPage() {
   const { progress } = useStudyData()
   const [query, setQuery] = useState('')
   const [levelFilter, setLevelFilter] = useState<LevelFilter>('all')
+  const [sourceFilter, setSourceFilter] = useState<SourceFilter>('all')
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
     return WORDS.filter((w) => {
       const matchesLevel = levelFilter === 'all' || w.level === levelFilter
+      const matchesSource =
+        sourceFilter === 'all' ||
+        (sourceFilter === 'core' ? !w.source : w.source === sourceFilter)
       const matchesQuery =
         q === '' || w.word.toLowerCase().includes(q) || w.meaning.includes(q)
-      return matchesLevel && matchesQuery
+      return matchesLevel && matchesSource && matchesQuery
     })
-  }, [query, levelFilter])
+  }, [query, levelFilter, sourceFilter])
 
   return (
     <div className="page wordlist-page">
@@ -61,6 +72,20 @@ export function WordListPage() {
         ))}
       </div>
 
+      {WORD_SOURCES.length > 0 && (
+        <div className="level-filter">
+          {SOURCE_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              className={`chip ${sourceFilter === opt.value ? 'chip-active' : ''}`}
+              onClick={() => setSourceFilter(opt.value)}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       <ul className="word-list">
         {filtered.map((w) => {
           const status = statusOf(progress[w.id])
@@ -70,6 +95,7 @@ export function WordListPage() {
                 <div className="word-list-word-row">
                   <span className="word-list-word">{w.word}</span>
                   <SpeakButton text={w.word} label={`${w.word} 발음 듣기`} />
+                  {w.source && <span className="word-source-tag">{w.source}</span>}
                 </div>
                 <span className="word-list-meaning">{w.meaning}</span>
               </div>

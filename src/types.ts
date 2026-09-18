@@ -8,6 +8,8 @@ export interface WordEntry {
   exampleMeaning: string
   level: WordLevel
   category: string
+  /** 이 단어가 특정 소스(영화 등)에서 유래했다면 표시 (예: 'Before Sunrise (1995)') */
+  source?: string
 }
 
 export interface WordProgress {

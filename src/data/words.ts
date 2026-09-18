@@ -1,7 +1,8 @@
 import type { WordEntry } from '../types'
+import { SCRIPT_WORDS } from './scriptWords'
 
 // id 형식: level 첫글자 + 순번 (b=beginner, i=intermediate, a=advanced)
-export const WORDS: WordEntry[] = [
+const CORE_WORDS: WordEntry[] = [
   // ---- Beginner ----
   { id: 'b1', word: 'apple', meaning: '사과', example: 'She eats an apple every morning.', exampleMeaning: '그녀는 매일 아침 사과를 먹는다.', level: 'beginner', category: '음식' },
   { id: 'b2', word: 'book', meaning: '책', example: 'He is reading a book in the library.', exampleMeaning: '그는 도서관에서 책을 읽고 있다.', level: 'beginner', category: '일상' },
@@ -89,4 +90,10 @@ export const WORDS: WordEntry[] = [
   { id: 'a20', word: 'discrepancy', meaning: '차이, 불일치', example: 'There is a discrepancy between the two reports.', exampleMeaning: '두 보고서 사이에 불일치가 있다.', level: 'advanced', category: '학문' },
 ]
 
+export const WORDS: WordEntry[] = [...CORE_WORDS, ...SCRIPT_WORDS]
+
 export const CATEGORIES = Array.from(new Set(WORDS.map((w) => w.category))).sort()
+
+export const WORD_SOURCES = Array.from(
+  new Set(WORDS.map((w) => w.source).filter((s): s is string => !!s)),
+).sort()
